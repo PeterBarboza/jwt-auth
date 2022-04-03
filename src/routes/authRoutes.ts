@@ -3,9 +3,7 @@ import { Router } from "express"
 import {
   createUserController,
   authUserController
-} from "./controllers/userController"
-
-import { IUserLogin } from "./types/IUser"
+} from "../controllers/userController"
 
 const router = Router()
 
@@ -21,10 +19,4 @@ router.post("/authenticate", async (req, res) => {
   res.status(status).json(data)
 })
 
-router.get("/projects", async (req, res) => {
-  res.status(200).json({ ok: true })
-})
-
-
-
-export { router }
+export default router
