@@ -18,28 +18,28 @@ export async function authUserService(req: Request): Promise<IResponseData> {
     return {
       status: 400,
       data: {
-        message: "User not found"
-      }
+        message: "User not found",
+      },
     }
   }
 
-  if (!await compare(password, user.password)) {
+  if (!(await compare(password, user.password))) {
     return {
       status: 400,
       data: {
-        message: "Invalid password"
-      }
+        message: "Invalid password",
+      },
     }
   }
 
-  user.password = undefined
+  user.password = null as any
   const token = generateToken(user._id.toString())
 
   return {
     status: 200,
     data: {
       user: user,
-      token: token
-    }
+      token: token,
+    },
   }
 }

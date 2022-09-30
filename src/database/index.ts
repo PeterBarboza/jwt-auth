@@ -1,15 +1,20 @@
 import { connect } from "mongoose"
 import "dotenv/config"
 
-const uri = process.env.DB_URI
+const host = process.env.DB_HOST || "localhost"
+
+const uri = `mongodb://${host}`
+
+console.log(uri)
 
 async function connectToMongoDB() {
-  try {
-    await connect(uri)
-    console.log("Successfully connected to MongoDB")
-  } catch (error) {
-    console.log(error)
-  }
+  connect(uri, { autoCreate: true, dbName: "jwt-auth" })
+    .then(() => {
+      console.log("Successfully connected to MongoDB")
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 export { connectToMongoDB }

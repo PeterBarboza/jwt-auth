@@ -9,16 +9,16 @@ export function verifyToken(token: string) {
   const secret = process.env.SECRET
 
   try {
-    const { _id } = verify(token, secret) as IPayload
+    const { _id } = verify(token, secret!) as IPayload
 
     return {
-      _id: _id
+      _id: _id,
     }
   } catch (error) {
     console.log(error)
 
     return {
-      _id: null
+      _id: null,
     }
   }
 }

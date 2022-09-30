@@ -13,31 +13,31 @@ export async function createUserService(req: Request): Promise<IResponseData> {
       return {
         status: 400,
         data: {
-          message: "User already exists"
-        }
+          message: "User already exists",
+        },
       }
     }
 
     const user = await User.create({
       name: name,
       email: email,
-      password: password
+      password: password,
     })
 
-    user.password = undefined
+    user.password = null as any
     const token = generateToken(user._id.toString())
 
     return {
       status: 200,
       data: {
         user: user,
-        token: token
-      }
+        token: token,
+      },
     }
   } catch (err) {
     return {
       status: 400,
-      data: err
+      data: err as any,
     }
   }
 }
